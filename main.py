@@ -32,10 +32,10 @@ def make_circle(x,y):
 
     def click_circle(x , y):
         global score
+        global game_over
         score += 1
         score_circle.clear()
         score_circle.write(arg="Score: {}".format(score), move=False, align="center", font=FONT)
-
 
     t.onclick(click_circle)
     t.penup()
@@ -82,6 +82,10 @@ def countdown(time):
         countdown_circle.write(arg="Time: {}".format(time),move=False,align="center",font=(FONT))
         drawing_board.ontimer(lambda: countdown(time - 1), 1000)
 
+    elif score > 35:
+        countdown_circle.clear()
+        countdown_circle.write(arg="You pass!!".format(score),move=False,align="center",font=(FONT))
+
     else:
         game_over = True
         countdown_circle.clear()
@@ -94,9 +98,8 @@ def start_game_up():
     setup_circles()
     hide_circles()
     show_circles_randomly()
-    countdown(10)
+    countdown(30)
     turtle.tracer(1)
 
 start_game_up()
 turtle.mainloop()
-
